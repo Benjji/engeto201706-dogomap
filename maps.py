@@ -22,13 +22,12 @@ def mark_on_map(dog, dogos):
     if not (dog.get('-col_6', False) and dog.get('-col_5', False) and dog.get('-col_4', False)):
         return
     dog_location = get_long_lat('{-col_6} {-col_5}, {-col_4}'.format(**dog))
-    print('{-col_6} {-col_5}, {-col_4}'.format(**dog))
-    print(dog_location)
     dogos.add_child(RegularPolygonMarker(location=dog_location, fill_color='red' if dog[
                     '-col_3'] == 'Ano' else 'blue', popup=dog['-col_0'], number_of_sides=8, radius=10))
     # If dogo is aggressive
     if dog['-col_3'] == 'Ano':
-        dogos.add_child(CircleMarker(location=dog_location, radius=25, fill_color='#A43747'))
+        dogos.add_child(CircleMarker(location=dog_location, radius=25,
+                                     color='#A63740', fill_color='#A43747'))
 
 
 map = Map(location=get_long_lat('Presov'), zoom_start=13)
@@ -41,7 +40,6 @@ for dog in dogos_file['ds']['rs']['data']['row']:
     if c > 10:
         break
     c += 1
-    # print(c)
     mark_on_map(dog, dogos)
 
 map.add_child(dogos)

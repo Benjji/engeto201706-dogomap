@@ -26,8 +26,8 @@ def mark_on_map(dog, dogos):
                     '-col_3'] == 'Ano' else 'blue', popup=dog['-col_0'], number_of_sides=8, radius=10))
     # If dogo is aggressive
     if dog['-col_3'] == 'Ano':
-        dogos.add_child(CircleMarker(location=dog_location, radius=25,
-                                     color='#A63740', fill_color='#A43747'))
+        CircleMarker(location=dog_location, radius=25,  popup=dog['-col_0'],
+                     color='#A63740', fill_color='red').add_to(dogos)
 
 
 map = Map(location=get_long_lat('Presov'), zoom_start=13)
@@ -37,7 +37,7 @@ dogos_file = get_dict_from_josn('psy.json')
 
 c = 0
 for dog in dogos_file['ds']['rs']['data']['row']:
-    if c > 10:
+    if c > 70:
         break
     c += 1
     mark_on_map(dog, dogos)
